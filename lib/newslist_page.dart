@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dicoding_news_app/model/article.dart';
+import 'package:dicoding_news_app/detail_page.dart';
 
 class NewsListPage extends StatelessWidget {
   static const routeName = '/article_list';
@@ -39,5 +40,9 @@ Widget _buildArticleItem(BuildContext context, Article article) {
     ),
     title: Text(article.title),
     subtitle: Text(article.author),
+    onTap: () {
+      Navigator.pushNamed(context, ArticleDetailPage.routeName,
+          arguments: article);
+    },
   );
 }
