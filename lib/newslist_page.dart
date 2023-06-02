@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:dicoding_news_app/model/article.dart';
 import 'package:dicoding_news_app/detail_page.dart';
+import 'package:flutter/material.dart';
 
 class NewsListPage extends StatelessWidget {
   static const routeName = '/article_list';
@@ -11,7 +11,9 @@ class NewsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('News App'),
+        title: const Text(
+          'News App',
+        ),
       ),
       body: FutureBuilder<String>(
         future:
@@ -28,21 +30,26 @@ class NewsListPage extends StatelessWidget {
       ),
     );
   }
-}
 
-Widget _buildArticleItem(BuildContext context, Article article) {
-  return ListTile(
-    contentPadding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-    leading: Image.network(
-      article.urlToImage,
-      width: 100,
-      errorBuilder: (ctx, error, _) => const Center(child: Icon(Icons.error)),
-    ),
-    title: Text(article.title),
-    subtitle: Text(article.author),
-    onTap: () {
-      Navigator.pushNamed(context, ArticleDetailPage.routeName,
-          arguments: article);
-    },
-  );
+  Widget _buildArticleItem(BuildContext context, Article article) {
+    return ListTile(
+      contentPadding:
+          const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      leading: Hero(
+        tag: article.urlToImage,
+        child: Image.network(
+          article.urlToImage,
+          width: 100,
+        ),
+      ),
+      title: Text(
+        article.title,
+      ),
+      subtitle: Text(article.author),
+      onTap: () {
+        Navigator.pushNamed(context, ArticleDetailPage.routeName,
+            arguments: article);
+      },
+    );
+  }
 }
